@@ -55,10 +55,12 @@ class Scene:
 class Stage:
     ''' Physical layer on with scene is happen like display screen or sense hat lcd matrix '''
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, refresh_rate=12):
         self.width = width
         self.height = height
+        self.refresh_rate = refresh_rate
         self.surface = None  # raw surface it can be anythig screen opengl surface, led matrix
+
 
     def init(self):
         ''' Initialise surface '''

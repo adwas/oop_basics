@@ -28,7 +28,7 @@ class Game:
         clock = pygame.time.Clock()
 
         while self.scene is not None:
-            time_step = clock.tick(60)
+            time_step = clock.tick(self.stage.refresh_rate)
             self.scene.load_if_needed()
             self.stage.clear()
             self.process_events()
@@ -39,7 +39,6 @@ class Game:
 
     def run(self):
         ''' Run program '''
-        print('Starting')
         pygame.init()
         pygame.display.set_caption(self.title)
         self.stage.init()
