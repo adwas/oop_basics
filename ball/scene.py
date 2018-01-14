@@ -1,11 +1,33 @@
 #!/usr/bin/env python3
 ''' Common class for game scenes '''
 
+import pygame
+
+class Stage:
+    ''' Physical layer on with scene is happen like display screen or sense hat lcd matrix '''
+
+    def __init__(self, width: int, height: int, refresh_rate: int = 12):
+        self.width: int = width
+        self.height: int = height
+        self.refresh_rate: int = refresh_rate
+        self.surface = None  # raw surface it can be anythig screen opengl surface, led matrix
+
+    def init(self):
+        ''' Initialise surface '''
+
+    def clear(self):
+        ''' Clears everything before rerendering '''
+        pass
+
+    def swap(self):
+        ''' swlap buffers '''
+        pass
+
 
 class Scene:
     ''' Simple Scene '''
 
-    def __init__(self, stage, next_scene=None):
+    def __init__(self, stage: Stage, next_scene: 'Scene' = None):
         ''' Initialises scene and points to next scene.
             By default next scene is the same scene.
         '''
@@ -29,17 +51,17 @@ class Scene:
         ''' Free alocated resources for scene '''
         pass
 
-    def go_to_next_scene(self):
+    def go_to_next_scene(self) -> 'Scene':
         ''' Unloads data from current scene before go to next scene'''
         if self != self.next_scene:
             self.unload_resources()
         return self.next_scene
 
-    def process(self, event):
+    def process(self, event: pygame.event):
         ''' Process event '''
         pass
 
-    def update(self, time_step):
+    def update(self, time_step: int):
         ''' Updates state for every game clock tick'''
         pass
 
@@ -49,26 +71,4 @@ class Scene:
 
     def reset(self):
         ''' Resets to initial state '''
-        pass
-
-
-class Stage:
-    ''' Physical layer on with scene is happen like display screen or sense hat lcd matrix '''
-
-    def __init__(self, width, height, refresh_rate=12):
-        self.width = width
-        self.height = height
-        self.refresh_rate = refresh_rate
-        self.surface = None  # raw surface it can be anythig screen opengl surface, led matrix
-
-
-    def init(self):
-        ''' Initialise surface '''
-
-    def clear(self):
-        ''' Clears everything before rerendering '''
-        pass
-
-    def swap(self):
-        ''' swlap buffers '''
         pass

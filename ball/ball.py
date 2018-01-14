@@ -3,14 +3,15 @@
 from game import Game
 from bounced_ball import BouncedBallScene
 from disp_stage import DisplayStage
+from scene import Scene, Stage
 
 
 def main():
     ''' Run program '''
     print('Starting Game')
-    stage = DisplayStage()
-    scene = BouncedBallScene(stage)
-    game = Game('Ball', scene, stage)
+    stage: Stage = DisplayStage()
+    scene: Scene = BouncedBallScene(stage)
+    game: Game = Game('Ball', scene, stage)
     game.run()
 
 

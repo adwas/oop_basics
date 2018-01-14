@@ -1,42 +1,44 @@
 #!/usr/bin/env python3
 
+from typing import List
 import pygame
-from scene import Scene
+from scene import Scene, Stage
+
 
 class SenseHatScene(Scene):
     ''' Scene which emulates SenseHAt LED matrix '''
-    LED_GRID_COLOR = (255, 255, 255)
-    LED_DEFAULT_COLOR = [220, 220, 220]  # light gray
+    LED_GRID_COLOR: List[int] = [255, 255, 255]
+    LED_DEFAULT_COLOR: List[int] = [220, 220, 220]  # light gray
 
-    def __init__(self, stage):
+    def __init__(self, stage: Stage):
         super().__init__(stage, self)
-        self.led_centers = []
+        self.led_centers: List[int] = []
 
-        self.led_matrix = [self.LED_DEFAULT_COLOR] * 64
+        self.led_matrix: List[int] = [self.LED_DEFAULT_COLOR] * 64
 
     def _draw_grid(self):
-        scr_width = self.stage.width
-        scr_height = self.stage.height
-        cell_width = scr_width / 8
+        scr_width: int = self.stage.width
+        scr_height: int = self.stage.height
+        cell_width: int = scr_width / 8
 
         for idx in range(8):
-            pos = cell_width * idx
+            pos: int = cell_width * idx
             pygame.draw.line(self.stage.surface, self.LED_GRID_COLOR,
                              (pos, 0), (pos, scr_height))
 
-        cell_hight = scr_height / 8
+        cell_hight: int = scr_height / 8
         for idx in range(8):
             pos = cell_hight * idx
             pygame.draw.line(self.stage.surface, self.LED_GRID_COLOR,
                              (0, pos), (scr_width, pos))
 
     def _draw_led_matrix(self):
-        scr_width = self.stage.width
-        cell_size = int(scr_width / 8)
-        cell_offset = int(cell_size / 2)
-        led_radius = cell_offset - 5
-        crd_x = 0
-        crd_y = 1
+        scr_width: int = self.stage.width
+        cell_size: int = int(scr_width / 8)
+        cell_offset: int = int(cell_size / 2)
+        led_radius: int = cell_offset - 5
+        crd_x: int = 0
+        crd_y: int = 1
 
         for idx in range(len(self.led_matrix)):
             crd_y = int(idx / 8)
@@ -144,13 +146,15 @@ class SenseHatEmulator:
 
     def __init__(self):
         from disp_stage import DisplayStage
-        self.stage = DisplayStage(800, 800)
-        self.sense = SenseHatScene(self.stage)
+        self.stage: Stage = DisplayStage(800, 800)
+        self.sense: Scene = SenseHatScene(self.stage)
 
-    def sense_object(self):
+    def sense_object(self) -> Scene:
+        ''' Returns Scene which emulates SenseHat. '''
         return self.sense
 
     def start(self):
+        ''' Starts emulator in separate thread. '''
         from game import Game
         game = Game('SenseHat LED Matrix emulator', self.sense, self.stage)
         # run game loop in separate thread game.run()

@@ -2,12 +2,16 @@
 import sys
 import pygame
 
+from scene import Scene, Stage
+
+
 class Game:
     ''' Handles game loop '''
-    def __init__(self, title, scene, stage):
-        self.scene = scene
-        self.title = title
-        self.stage = stage
+
+    def __init__(self, title: str, scene: Scene, stage: Stage):
+        self.scene: Scene = scene
+        self.title: str = title
+        self.stage: Stage = stage
 
     def exit_game(self):
         ''' Exits the program '''

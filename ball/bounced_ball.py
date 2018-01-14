@@ -1,32 +1,32 @@
 # pylint: disable=C0111
 
+from typing import List, Callable
 import pygame
+from scene import Scene, Stage
 
-from scene import Scene
-
-COLOR_WHITE = (255, 255, 255)
+COLOR_WHITE: List[int] = [255, 255, 255]
 
 
 class ColisionItem:
-    def __init__(self, rect=pygame.Rect(0, 0, 0, 0)):
-        self.wrapping_rect = rect
+    def __init__(self, rect: pygame.Rect=pygame.Rect(0, 0, 0, 0)):
+        self.wrapping_rect: pygame.Rect = rect
 
 
 class Ball(ColisionItem):
 
-    def __init__(self, center_x, center_y):
+    def __init__(self, center_x: int, center_y: int):
                         #(left, top, width, height)
         super().__init__(pygame.Rect(0, 0, 40, 40))
-        self.wrapping_rect.center = (center_x, center_y)
-        self.ball_move = [-1, -3]
+        self.wrapping_rect.center = [center_x, center_y]
+        self.ball_move: List[int] = [-1, -3]
 
     @property
-    def center(self):
+    def center(self) -> List[int]:
         # center is delegated to wrapping_rect.center
         return self.wrapping_rect.center
 
     @center.setter
-    def center(self, value):
+    def center(self, value: List[int]):
         self.wrapping_rect.center = value
 
     def y_axis_reflection(self):
@@ -35,10 +35,10 @@ class Ball(ColisionItem):
     def x_axis_reflection(self):
         self._axis_reflection(1)
 
-    def _axis_reflection(self, idx):
+    def _axis_reflection(self, idx: int):
         self.ball_move[idx] = self.ball_move[idx] * -1
 
-    def draw(self, stage):
+    def draw(self, stage: Stage):
         pygame.draw.circle(stage.surface, COLOR_WHITE, self.center, int(
             self.wrapping_rect.height / 2))
 
@@ -48,20 +48,20 @@ class Ball(ColisionItem):
 
 class Wall(ColisionItem):
 
-    def __init__(self, left, top, width, height, reflection):
+    def __init__(self, left: int, top: int, width: int, height: int, reflection: Callable):
         super().__init__(pygame.Rect(left, top, width, height))
-        self.reflection = reflection
+        self.reflection: Callable = reflection
 
 
 class Paddle(ColisionItem):
 
-    def __init__(self, stage, reflection):
+    def __init__(self, stage: Stage, reflection: Callable):
         super().__init__(pygame.Rect(stage.width / 2, stage.height - 20, 60, 20))
-        self.reflection = reflection
-        self.paddle_move = 0
-        self.stage = stage
+        self.reflection: Callable = reflection
+        self.paddle_move: int = 0
+        self.stage: Stage = stage
 
-    def draw(self, stage):
+    def draw(self, stage: Stage):
         pygame.draw.rect(stage.surface, COLOR_WHITE, self.wrapping_rect)
 
     def move(self):
@@ -71,6 +71,7 @@ class Paddle(ColisionItem):
         elif self.wrapping_rect.x >= self.stage.width - self.wrapping_rect.width:
             self.wrapping_rect.x = self.stage.width - self.wrapping_rect.width
         self.paddle_move = Paddle._maxmove(self.paddle_move * 1.5, 15)
+
     def turn_left(self):
         self.paddle_move = -1
 
@@ -81,7 +82,7 @@ class Paddle(ColisionItem):
         self.paddle_move = 0
 
     @staticmethod
-    def _maxmove(value, maxvalue):
+    def _maxmove(value: int, maxvalue: int) -> int:
         if value < -1 * maxvalue:
             return -1 * maxvalue
         if value > maxvalue:
@@ -91,7 +92,7 @@ class Paddle(ColisionItem):
 
 class BouncedBallScene(Scene):
 
-    def __init__(self, stage):
+    def __init__(self, stage: Stage):
         super().__init__(stage, self)
         # ball position to center of the screen
         self.ball = Ball(center_x=stage.width / 2, center_y=stage.height / 2)
@@ -109,7 +110,7 @@ class BouncedBallScene(Scene):
         self.collision_items = [self.paddle, self.bottom_wall,
                                 self.left_wall, self.top_wall, self.right_wall]
 
-    def update(self, time_step):
+    def update(self, time_step: int):
         self.ball.move()
         self.paddle.move()
 
@@ -126,7 +127,7 @@ class BouncedBallScene(Scene):
         self.ball.draw(self.stage)
         self.paddle.draw(self.stage)
 
-    def process(self, event):
+    def process(self, event: pygame.event):
         from pygame.constants import KEYDOWN, K_ESCAPE, K_LEFT, K_RIGHT, KEYUP
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:

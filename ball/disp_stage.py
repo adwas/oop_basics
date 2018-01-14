@@ -7,7 +7,7 @@ import pygame
 
 class DisplayStage(Stage):
 
-    def __init__(self, width=800, height=600):
+    def __init__(self, width: int=800, height: int=600):
         super().__init__(width, height, refresh_rate=60)
         self.fill_color = 0, 0, 0  # black color
 
