@@ -1,0 +1,3 @@
+{
+  "tests/a001_temp_test.py::TestTemeratureCase::test_fahrenheit_temperature_monitor": true
+}
