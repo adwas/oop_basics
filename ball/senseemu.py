@@ -32,7 +32,7 @@ class SenseHatScene(Scene):
             pygame.draw.line(self.stage.surface, self.LED_GRID_COLOR,
                              (0, pos), (scr_width, pos))
 
-    def _draw_led_matrix(self):
+    def _draw_led_matrix2(self):
         scr_width: int = self.stage.width
         cell_size: int = int(scr_width / 8)
         cell_offset: int = int(cell_size / 2)
@@ -48,6 +48,23 @@ class SenseHatScene(Scene):
             p_y = crd_y * cell_size + cell_offset
             pygame.draw.circle(self.stage.surface, color,
                                (p_x, p_y), led_radius)
+
+    def _draw_led_matrix(self):
+        scr_width: int = self.stage.width
+        cell_size: int = int(scr_width / 8)
+        cell_offset: int = 2
+        led_width: int = cell_size -4
+        crd_x: int = 0
+        crd_y: int = 1
+
+        for idx in range(len(self.led_matrix)):
+            crd_y = int(idx / 8)
+            crd_x = idx % 8
+            color = self.led_matrix[idx]
+            p_x = crd_x * cell_size + cell_offset
+            p_y = crd_y * cell_size + cell_offset
+            pygame.draw.rect(self.stage.surface, color,
+                             pygame.Rect(p_x, p_y, led_width, led_width))
 
     def render(self):
         self._draw_grid()

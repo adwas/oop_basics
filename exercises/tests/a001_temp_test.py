@@ -9,6 +9,12 @@ T(K) = T(°C) + 273.15
 
 Conversion results should be rounded to two digits.
 
+PL:
+Napisz klasę Temerature ktora przechowuje wartość temperatury w Fahrenheitach
+i ma metody do konwersji wartości do Celcjusza i Kelwina.
+
+Każda konwersja powinna powinna zaokrąglać wynik do dwóch miejsc po przecinku.
+
 '''
 import unittest
 from src import monitor
@@ -37,3 +43,4 @@ class TestTemperatureCase(unittest.TestCase):
                          ' Incorrect celsius value')
         self.assertEqual(temp.as_kelvin(), 0,
                          ' Incorrect kelvin value')
+
