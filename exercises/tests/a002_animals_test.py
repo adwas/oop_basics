@@ -1,8 +1,4 @@
-'''
-Napisz abstrakcyjną klasę reprezentujące zwierzę.
-Napisz abstrakcyjną metodę, która zwraca dźwięk wydawanego przez zwierzę.
-
-'''
+# pylint: disable=C0111
 
 import inspect
 import unittest
@@ -94,4 +90,3 @@ class TestAnimalsCase(unittest.TestCase):
     def test_Horse_should_not_be_carnivorous(self):
         a_horse = animals.Horse()
         self.assertFalse(a_horse.is_carnivorous())
-

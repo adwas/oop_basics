@@ -1,3 +1,4 @@
+# pylint: disable=C0111
 '''
 Create class Temerature that holds a temperature in Fahrenheit
 and provide methods to convert to Celsius and Kelvin.
@@ -19,6 +20,7 @@ Każda konwersja powinna powinna zaokrąglać wynik do dwóch miejsc po przecink
 import unittest
 from src import monitor
 
+
 class TestTemperatureCase(unittest.TestCase):
 
     def test_fahrenheit_temperature_monitor(self):
@@ -32,7 +34,6 @@ class TestTemperatureCase(unittest.TestCase):
         self.assertEqual(temp.as_kelvin(), 233.15,
                          ' Incorrect kelvin value')
 
-
     def test_float_fahrenheit_temperature_monitor(self):
 
         temp = monitor.Temperature(-459.673456)
@@ -43,4 +44,3 @@ class TestTemperatureCase(unittest.TestCase):
                          ' Incorrect celsius value')
         self.assertEqual(temp.as_kelvin(), 0,
                          ' Incorrect kelvin value')
-
