@@ -32,6 +32,17 @@ class TestGFX2dCase(unittest.TestCase):
         distance = point1.distance_to(point2)
         self.assertEqual(distance, 7.81)
 
+    def test_point_equals(self):
+        ''' Hint this is genearl equality method ( not recommendet but for whis tests useful)
+        def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.__dict__ == other.__dict__
+        return False
+        '''
+        point1 = gfx2d.Point2d(9, 7)
+        point2 = gfx2d.Point2d(9, 7)
+        self.assertEqual(point1, point2)
+
     def test_color_class(self):
         color = gfx2d.RgbColor(255, 0, 1)
         self.assertEqual(color.r_color, 255)
