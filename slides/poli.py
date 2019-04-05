@@ -3,12 +3,12 @@ import pprint
 
 class Poli:
 
-    #    def __init__(self, a: int=0, b: int=0):
-    #        self.a: int = a
-    #        self.b: int = b
+    # def __init__(self, a: int=0, b: int=0):
+    #     self.a: int = a
+    #     self.b: int = b
 
-    #    def __init__(self, name: str=0):
-    #        self.name: str = name
+    # def __init__(self, name: str=0):
+    #     self.name: str = name
 
     def __init__(self, a: int=0, b: int=0, name: str=''):
         self.a: int = a

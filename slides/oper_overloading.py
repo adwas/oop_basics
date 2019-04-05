@@ -8,9 +8,11 @@ class Gender(Enum):
     FEMALE = 'female'
     MALE = 'male'
 
+    @staticmethod
     def isGender(value):
         return value in (Gender.MALE, Gender.FEMALE)
 
+    @staticmethod
     def validate(value):
         if not Gender.isGender(value):
             raise ValueError('gender not valid')
