@@ -66,7 +66,7 @@ class TestAnimalsCase(unittest.TestCase):
 
     def test_Duck_should_say_quack(self):
         a_duck = animals.Duck()
-        self.assertEquals(a_duck.say_hello(), "Quack...Quack")
+        self.assertEqual(a_duck.say_hello(), "Quack...Quack")
 
     def test_Duck_should_not_be_mammal(self):
         a_duck = animals.Duck()
@@ -81,7 +81,7 @@ class TestAnimalsCase(unittest.TestCase):
 
     def test_Horse_should_say_neigh(self):
         a_horse = animals.Horse()
-        self.assertEquals(a_horse.say_hello(), "Neigh")
+        self.assertEqual(a_horse.say_hello(), "Neigh")
 
     def test_Horse_should_be_mammal(self):
         a_horse = animals.Horse()
